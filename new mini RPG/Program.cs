@@ -13,6 +13,7 @@ namespace new_mini_RPG
                 Console.WriteLine("Неправильный ввод:");
                 input = Console.ReadLine();
             }
+            number = number - 1;
             return number;
         }
 
@@ -43,25 +44,25 @@ namespace new_mini_RPG
                 {
                     switch (GetInt(maxHeroSampleCount))
                     {
-                        case 1:
+                        case 0:
                             {
                                 HeroesBase hero = new Ork();
                                 flag = yourTeam.HeroAdd(hero);
                                 break;
                             }
-                        case 2:
+                        case 1:
                             {
                                 HeroesBase hero = new Shaman();
                                 flag = yourTeam.HeroAdd(hero);
                                 break;
                             }
-                        case 3:
+                        case 2:
                             {
                                 HeroesBase hero = new Knight();
                                 flag = yourTeam.HeroAdd(hero);
                                 break;
                             }
-                        case 4:
+                        case 3:
                             {
                                 HeroesBase hero = new Mag();
                                 flag = yourTeam.HeroAdd(hero);
@@ -135,7 +136,7 @@ namespace new_mini_RPG
                 while (death != false)
                 {
                     Console.WriteLine("Ваш герой уже мертв.");
-                    Console.WriteLine("Выбери, кого атаковать:");
+                    Console.WriteLine("Выбери, кем атаковать:");
                     attackingPlayerHero = GetInt(maxHeroTeamCount);
                     death = yourTeam.PlayerDeathCheck(attackingPlayerHero);
                 }
@@ -149,10 +150,10 @@ namespace new_mini_RPG
                     playerTarget = GetInt(maxHeroTeamCount);
                     death = computerTeam.PlayerDeathCheck(playerTarget);
                 }
-                int yourAttackingHeroDamage = yourTeam.GettingYourAttackingHeroDamage(attackingPlayerHero);
-                string yourAttackingHeroName = yourTeam.GettingYourAttackingHeroName(attackingPlayerHero);
+                int yourAttackingHeroDamage = yourTeam.GettingAttackingHeroDamage(attackingPlayerHero);
+                string yourAttackingHeroName = yourTeam.GettingAttackingHeroName(attackingPlayerHero);
                 Console.Clear();
-                computerTeam.YourAttack(playerTarget, yourAttackingHeroDamage, yourAttackingHeroName);//-------------атака игрока
+                computerTeam.Attack(playerTarget, yourAttackingHeroDamage, yourAttackingHeroName, yourTeam.Name, computerTeam.Name);//-------------атака игрока
                 Console.WriteLine("Для продолжения нажмите Enter...");
                 Console.ReadLine();
                 Console.Clear();
@@ -171,10 +172,10 @@ namespace new_mini_RPG
                     computerTarget = randomGenerator.Next(3);
                     death = yourTeam.ComputerDeathCheck(computerTarget);
                 }
-                int computerAttackingHeroDamage = computerTeam.GettingComputerAttackingHeroDamage(attackingComputerHero);
-                string computerAttackingHeroName = computerTeam.GettingComputerAttackingHeroName(attackingComputerHero);
+                int computerAttackingHeroDamage = computerTeam.GettingAttackingHeroDamage(attackingComputerHero);
+                string computerAttackingHeroName = computerTeam.GettingAttackingHeroName(attackingComputerHero);
                 Console.Clear();
-                yourTeam.ComputerAttack(computerTarget, computerAttackingHeroDamage, computerAttackingHeroName);//-------------атака компьютера
+                yourTeam.Attack(computerTarget, computerAttackingHeroDamage, computerAttackingHeroName, computerTeam.Name, yourTeam.Name);//-------------атака компьютера
                 Console.WriteLine("Для продолжения нажмите Enter...");
                 Console.ReadLine();
             }

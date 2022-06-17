@@ -27,19 +27,11 @@ namespace new_mini_RPG
             Heroes.Add(hero);
             return true;
         }
-            //----------------------------------------------------------------------------------------
-        public int GettingYourAttackingHeroDamage(int attackingPlayerHero)
-        {
-            return Heroes[attackingPlayerHero - 1].Damage;
-        }
-        public string GettingYourAttackingHeroName(int attackingPlayerHero)
-        {
-            return Heroes[attackingPlayerHero - 1].Name;
-        }
+        
         public bool PlayerDeathCheck(int playerTarget)
         {
             bool death;
-            if (Heroes[playerTarget - 1].HP <= 0)
+            if (Heroes[playerTarget].HP <= 0)
             {
                 death = true;
             }
@@ -49,25 +41,7 @@ namespace new_mini_RPG
             }
             return death;
         }
-        public void YourAttack(int playerTarget,int yourAttackingHeroDamage,string yourAttackingHeroName)
-        {
-            Heroes[playerTarget - 1].Damaging(yourAttackingHeroDamage);
-            YourAttackInfo(playerTarget, yourAttackingHeroDamage, yourAttackingHeroName);
-        }
-        public void YourAttackInfo(int playerTarget, int yourAttackingHeroDamage, string yourAttackingHeroName)
-        {
-            Console.WriteLine($"Ваш {yourAttackingHeroName} нанес {yourAttackingHeroDamage} урона {Heroes[playerTarget - 1].Name}у компьютера.");
-        }
             //-----------------------------------------------------------------------------------------
-            //-----------------------------------------------------------------------------------------
-        public int GettingComputerAttackingHeroDamage(int attackingComputerHero)
-        {
-            return Heroes[attackingComputerHero].Damage;
-        }
-        public string GettingComputerAttackingHeroName(int attackingComputerHero)
-        {
-            return Heroes[attackingComputerHero].Name;
-        }
         public bool ComputerDeathCheck(int computerTarget)
         {
             bool death;
@@ -81,16 +55,25 @@ namespace new_mini_RPG
             }
             return death;
         }
-        public void ComputerAttack(int computerTarget, int computerAttackingHeroDamage, string computerAttackingHeroName)
+        //-------------------------------------------------------------------------------------------атака
+        public int GettingAttackingHeroDamage(int attackingHero)
         {
-            Heroes[computerTarget].Damaging(computerAttackingHeroDamage);
-            ComputerAttackInfo(computerTarget, computerAttackingHeroDamage, computerAttackingHeroName);
+            return Heroes[attackingHero].Damage;
         }
-        public void ComputerAttackInfo(int computerTarget, int computerAttackingHeroDamage, string computerAttackingHeroName)
+        public string GettingAttackingHeroName(int attackingHero)
         {
-            Console.WriteLine($"{computerAttackingHeroName} компьютера нанес {computerAttackingHeroDamage} урона вашему {Heroes[computerTarget].Name}у.");
+            return Heroes[attackingHero].Name;
         }
-            //-------------------------------------------------------------------------------------------
+        public void Attack(int target, int attackingHeroDamage, string attackingHeroName, string attackingTeamName, string targetTeamName)
+        {
+            Heroes[target].Damaging(attackingHeroDamage);
+            AttackInfo(target, attackingHeroDamage, attackingHeroName, attackingTeamName, targetTeamName);
+        }
+        public void AttackInfo(int target, int attackingHeroDamage, string attackingHeroName, string attackingTeamName, string targetTeamName)
+        {
+            Console.WriteLine($"{attackingHeroName}({attackingTeamName}) нанес {attackingHeroDamage} урона {Heroes[target].Name}у({targetTeamName}).");
+        }
+            //-------------------------------------------------------------------------------------------атака
         public void ShowInfo()
         {
             Console.WriteLine("----------");
